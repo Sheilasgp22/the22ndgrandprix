@@ -12,12 +12,14 @@
         :root {
             --black: #08080a;
             --dark: #101014;
+            --dark-2: #15151b;
             --red: #8b0d16;
             --red-bright: #c41224;
             --purple: #7b4ba3;
             --purple-dark: #45205f;
             --white: #f4f1ed;
             --gray: #a6a3a8;
+            --line: rgba(255,255,255,0.1);
         }
 
         * {
@@ -37,9 +39,146 @@
             overflow-x: hidden;
         }
 
-        /* =========================
-           BACKGROUND
-        ========================= */
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =====================================
+           NAVIGATION
+        ===================================== */
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            background: rgba(8,8,10,0.82);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .nav-logo {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .nav-logo span {
+            color: var(--purple);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-size: 0.58rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--gray);
+            transition: 0.25s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -7px;
+            width: 0;
+            height: 2px;
+            background: var(--purple);
+            transition: width 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-button {
+            display: none;
+            background: none;
+            border: 0;
+            color: var(--white);
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        /* =====================================
+           GENERAL
+        ===================================== */
+
+        section {
+            scroll-margin-top: 72px;
+        }
+
+        .section-wrap {
+            width: min(1180px, 88%);
+            margin: auto;
+        }
+
+        .section-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(5rem, 12vw, 10rem);
+            line-height: 0.8;
+            color: rgba(255,255,255,0.035);
+            position: absolute;
+            right: 5%;
+            top: 70px;
+            user-select: none;
+        }
+
+        .section-label {
+            color: var(--purple);
+            font-size: 0.63rem;
+            font-weight: 700;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3rem, 7vw, 6.5rem);
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .section-title .red {
+            color: var(--red-bright);
+        }
+
+        .section-title .purple {
+            color: var(--purple);
+        }
+
+        .section-description {
+            max-width: 680px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.9;
+        }
+
+        /* =====================================
+           HOME
+        ===================================== */
 
         .hero {
             min-height: 100vh;
@@ -48,7 +187,6 @@
             overflow: hidden;
             display: flex;
             align-items: center;
-            justify-content: center;
             background:
                 radial-gradient(
                     circle at 78% 48%,
@@ -80,10 +218,7 @@
                     rgba(255,255,255,0.025) 45.2%,
                     transparent 45.5%
                 );
-            pointer-events: none;
         }
-
-        /* Decorative racing lines */
 
         .track-line {
             position: absolute;
@@ -124,8 +259,6 @@
             );
         }
 
-        /* Giant 22 */
-
         .giant-number {
             position: absolute;
             right: 4vw;
@@ -140,16 +273,13 @@
             pointer-events: none;
         }
 
-        /* =========================
-           CONTENT
-        ========================= */
-
         .hero-content {
             position: relative;
             z-index: 5;
             width: min(1200px, 90%);
-            padding: 60px 0;
-            animation: appear 1.2s ease forwards;
+            margin: auto;
+            padding: 90px 0 70px;
+            animation: appear 1s ease forwards;
         }
 
         .eyebrow {
@@ -200,10 +330,6 @@
             color: var(--gray);
         }
 
-        /* =========================
-           DRIVER INFO
-        ========================= */
-
         .driver-info {
             margin-top: 55px;
             display: flex;
@@ -225,37 +351,14 @@
             color: var(--purple);
         }
 
-        .number-label {
+        .number-label,
+        .birthday {
             display: flex;
             flex-direction: column;
             gap: 4px;
         }
 
-        .number-label small {
-            font-size: 0.6rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--gray);
-        }
-
-        .number-label strong {
-            font-size: 0.9rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .divider {
-            width: 1px;
-            height: 45px;
-            background: rgba(255,255,255,0.2);
-        }
-
-        .birthday {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
+        .number-label small,
         .birthday small {
             font-size: 0.6rem;
             letter-spacing: 0.25em;
@@ -263,14 +366,17 @@
             color: var(--gray);
         }
 
+        .number-label strong,
         .birthday strong {
             font-size: 0.9rem;
             letter-spacing: 0.08em;
         }
 
-        /* =========================
-           BUTTON
-        ========================= */
+        .divider {
+            width: 1px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+        }
 
         .enter-button {
             display: inline-flex;
@@ -318,10 +424,6 @@
             transform: translateX(5px);
         }
 
-        /* =========================
-           SCROLL INDICATOR
-        ========================= */
-
         .scroll-indicator {
             position: absolute;
             z-index: 5;
@@ -341,83 +443,575 @@
         .scroll-line {
             width: 1px;
             height: 35px;
-            background: linear-gradient(
-                var(--purple),
-                transparent
-            );
+            background: linear-gradient(var(--purple), transparent);
             animation: scrollPulse 1.8s infinite;
         }
 
-        /* =========================
-           SECOND SECTION
-        ========================= */
+        /* =====================================
+           DRIVER PROFILE
+        ===================================== */
 
-        .intro-section {
-            min-height: 70vh;
-            padding: 120px 8%;
-            background: var(--dark);
+        .driver-section {
+            min-height: 100vh;
             position: relative;
+            padding: 130px 0;
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .profile-grid {
+            margin-top: 65px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .profile-card {
+            padding: 32px;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid var(--line);
+            transition: 0.3s ease;
+        }
+
+        .profile-card:hover {
+            border-color: rgba(123,75,163,0.5);
+            transform: translateY(-4px);
+        }
+
+        .profile-card .card-label {
+            font-size: 0.58rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .profile-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .profile-card h3 span {
+            color: var(--purple);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            margin-top: 25px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+
+        .stat {
+            padding: 24px;
+            background: var(--dark);
+        }
+
+        .stat strong {
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.4rem;
+            color: var(--purple);
+        }
+
+        .stat span {
+            color: var(--gray);
+            font-size: 0.58rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .favorites {
+            margin-top: 25px;
             display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .tag {
+            padding: 9px 13px;
+            border: 1px solid var(--line);
+            color: var(--gray);
+            font-size: 0.58rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* =====================================
+           STORY
+        ===================================== */
+
+        .story-section {
+            min-height: 100vh;
+            position: relative;
+            padding: 130px 0;
+            background: #0b0b0e;
+            overflow: hidden;
+        }
+
+        .timeline {
+            margin-top: 70px;
+            position: relative;
+            max-width: 850px;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 9px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(
+                var(--purple),
+                var(--red-bright),
+                transparent
+            );
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 45px;
+            padding-bottom: 55px;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 3px;
+            top: 3px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--purple);
+            box-shadow: 0 0 20px rgba(123,75,163,0.45);
+        }
+
+        .timeline-date {
+            color: var(--red-bright);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            margin-bottom: 13px;
+        }
+
+        .timeline-item p {
+            color: var(--gray);
+            font-size: 0.85rem;
+            line-height: 1.9;
+            max-width: 680px;
+        }
+
+        /* =====================================
+           PADDOCK
+        ===================================== */
+
+        .paddock-section {
+            min-height: 100vh;
+            padding: 130px 0;
+            position: relative;
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(123,75,163,0.11),
+                    transparent 30%
+                ),
+                var(--dark);
+        }
+
+        .paddock-grid {
+            margin-top: 65px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .paddock-card {
+            min-height: 220px;
+            position: relative;
+            overflow: hidden;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: linear-gradient(
+                145deg,
+                #17171d,
+                #0d0d10
+            );
+            border: 1px solid var(--line);
+            transition: 0.35s ease;
+        }
+
+        .paddock-card::before {
+            content: "";
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            right: -50px;
+            top: -50px;
+            border-radius: 50%;
+            background: rgba(123,75,163,0.12);
+        }
+
+        .paddock-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(196,18,36,0.5);
+        }
+
+        .paddock-icon {
+            position: absolute;
+            top: 25px;
+            right: 28px;
+            font-size: 2.3rem;
+            filter: grayscale(0.2);
+        }
+
+        .paddock-card small {
+            color: var(--purple);
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .paddock-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+
+        .paddock-card p {
+            margin-top: 8px;
+            color: var(--gray);
+            font-size: 0.72rem;
+            line-height: 1.6;
+        }
+
+        /* =====================================
+           RACE CONTROL
+        ===================================== */
+
+        .games-section {
+            min-height: 100vh;
+            padding: 130px 0;
+            background: #09090c;
+            position: relative;
+        }
+
+        .game-panel {
+            margin-top: 65px;
+            max-width: 850px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,0.025);
+        }
+
+        .game-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .intro-section::before {
-            content: "01";
-            position: absolute;
-            top: 70px;
-            right: 8%;
+        .game-header span {
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .game-lights {
+            display: flex;
+            gap: 6px;
+        }
+
+        .light {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--red-bright);
+        }
+
+        .game-content {
+            padding: 45px;
+        }
+
+        .game-content h3 {
             font-family: 'Oswald', sans-serif;
-            font-size: 7rem;
-            color: rgba(255,255,255,0.025);
+            font-size: 2.6rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
-        .intro-inner {
+        .game-content p {
+            color: var(--gray);
+            font-size: 0.8rem;
+            line-height: 1.8;
+        }
+
+        .game-placeholder {
+            margin-top: 30px;
+            padding: 25px;
+            border-left: 2px solid var(--purple);
+            background: rgba(123,75,163,0.05);
+            color: var(--gray);
+            font-size: 0.7rem;
+            letter-spacing: 0.08em;
+        }
+
+        /* =====================================
+           PR CONTRACT
+        ===================================== */
+
+        .pr-section {
+            min-height: 100vh;
+            padding: 130px 0;
+            background: var(--dark);
+            position: relative;
+        }
+
+        .contract {
             max-width: 900px;
+            margin-top: 65px;
+            padding: 50px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background:
+                linear-gradient(
+                    rgba(255,255,255,0.025),
+                    rgba(255,255,255,0.01)
+                );
+            position: relative;
         }
 
-        .section-label {
-            font-size: 0.65rem;
+        .contract::before {
+            content: "OFFICIAL";
+            position: absolute;
+            right: 30px;
+            top: 25px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            color: var(--red-bright);
+        }
+
+        .contract h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .contract-subtitle {
+            color: var(--purple);
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .contract-rule {
+            height: 1px;
+            background: var(--line);
+            margin: 30px 0;
+        }
+
+        .contract ol {
+            padding-left: 20px;
+            color: var(--gray);
+        }
+
+        .contract li {
+            margin-bottom: 18px;
+            padding-left: 7px;
+            font-size: 0.78rem;
+            line-height: 1.8;
+        }
+
+        .contract li strong {
+            color: var(--white);
+        }
+
+        /* =====================================
+           PLAYLIST
+        ===================================== */
+
+        .playlist-section {
+            min-height: 80vh;
+            padding: 130px 0;
+            background:
+                radial-gradient(
+                    circle at 20% 50%,
+                    rgba(123,75,163,0.12),
+                    transparent 30%
+                ),
+                #0a090d;
+        }
+
+        .playlist-card {
+            margin-top: 60px;
+            max-width: 900px;
+            border: 1px solid var(--line);
+        }
+
+        .playlist-top {
+            padding: 35px;
+            background: linear-gradient(
+                135deg,
+                var(--purple-dark),
+                #17121c
+            );
+        }
+
+        .playlist-top small {
+            font-size: 0.58rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .playlist-top h3 {
+            margin-top: 10px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+        }
+
+        .playlist-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .song {
+            padding: 20px 25px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .song-number {
+            color: var(--purple);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+        }
+
+        .song-info strong {
+            display: block;
+            font-size: 0.72rem;
+        }
+
+        .song-info span {
+            display: block;
+            margin-top: 4px;
+            color: var(--gray);
+            font-size: 0.58rem;
+        }
+
+        /* =====================================
+           FINAL LAP
+        ===================================== */
+
+        .final-section {
+            min-height: 100vh;
+            padding: 150px 0;
+            display: flex;
+            align-items: center;
+            background:
+                radial-gradient(
+                    circle at 50% 40%,
+                    rgba(123,75,163,0.15),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    145deg,
+                    #070709,
+                    #13090d
+                );
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-content {
+            text-align: center;
+            width: min(850px, 90%);
+            margin: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .final-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(7rem, 25vw, 20rem);
+            line-height: 0.75;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(123,75,163,0.3);
+            margin-bottom: 35px;
+        }
+
+        .final-content h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            text-transform: uppercase;
+            line-height: 0.9;
+        }
+
+        .final-content h2 span {
+            color: var(--purple);
+        }
+
+        .final-message {
+            margin: 35px auto 0;
+            max-width: 600px;
+            color: var(--gray);
+            font-size: 0.85rem;
+            line-height: 1.9;
+        }
+
+        .podium {
+            margin-top: 50px;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .podium-line {
+            width: 180px;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                var(--purple),
+                transparent
+            );
+        }
+
+        .podium-text {
+            color: var(--purple);
+            font-size: 0.58rem;
+            font-weight: 700;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: var(--purple);
-            font-weight: 700;
-            margin-bottom: 18px;
         }
 
-        .intro-title {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            font-size: clamp(2.8rem, 6vw, 5.5rem);
-            line-height: 0.95;
-            margin-bottom: 30px;
-        }
-
-        .intro-text {
-            max-width: 650px;
-            color: var(--gray);
-            line-height: 1.9;
-            font-size: 0.95rem;
-        }
-
-        .coming-soon {
-            margin-top: 45px;
-            display: inline-block;
-            border-left: 2px solid var(--red-bright);
-            padding-left: 18px;
-            color: var(--white);
-            font-size: 0.7rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-        }
-
-        /* =========================
+        /* =====================================
            FOOTER
-        ========================= */
+        ===================================== */
 
         footer {
-            padding: 30px 8%;
-            background: #060607;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 28px 6%;
+            background: #050506;
+            border-top: 1px solid var(--line);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -427,18 +1021,31 @@
 
         footer span {
             color: rgba(255,255,255,0.35);
-            font-size: 0.58rem;
+            font-size: 0.55rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
         }
 
-        .footer-purple {
+        footer .purple {
             color: var(--purple);
         }
 
-        /* =========================
+        /* =====================================
            ANIMATIONS
-        ========================= */
+        ===================================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         @keyframes appear {
             from {
@@ -465,35 +1072,78 @@
             }
         }
 
-        /* =========================
+        /* =====================================
            MOBILE
-        ========================= */
+        ===================================== */
 
-        @media (max-width: 700px) {
+        @media (max-width: 850px) {
+
+            .nav-links {
+                position: absolute;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                padding: 25px 7%;
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 22px;
+                background: rgba(8,8,10,0.97);
+                border-bottom: 1px solid var(--line);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .profile-grid,
+            .paddock-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .playlist-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                height: 64px;
+                padding: 0 7%;
+            }
+
+            section {
+                scroll-margin-top: 64px;
+            }
 
             .hero-content {
                 width: 86%;
-                padding-bottom: 90px;
+                padding-top: 100px;
             }
 
             .eyebrow {
-                font-size: 0.58rem;
-                letter-spacing: 0.2em;
+                font-size: 0.55rem;
+                letter-spacing: 0.18em;
             }
 
             .title {
-                font-size: clamp(4rem, 18vw, 7rem);
+                font-size: clamp(3.8rem, 18vw, 6rem);
             }
 
             .subtitle {
-                font-size: 0.65rem;
-                letter-spacing: 0.13em;
+                font-size: 0.63rem;
+                letter-spacing: 0.12em;
                 line-height: 1.7;
                 max-width: 300px;
             }
 
             .driver-info {
-                margin-top: 40px;
+                margin-top: 38px;
                 gap: 22px;
             }
 
@@ -513,7 +1163,7 @@
 
             .giant-number {
                 right: -5vw;
-                bottom: 3vh;
+                bottom: 2vh;
                 font-size: 65vw;
             }
 
@@ -521,27 +1171,82 @@
                 display: none;
             }
 
-            .intro-section {
-                min-height: 75vh;
-                padding: 90px 8%;
+            .section-wrap {
+                width: 86%;
             }
 
-            .intro-section::before {
+            .driver-section,
+            .story-section,
+            .paddock-section,
+            .games-section,
+            .pr-section,
+            .playlist-section {
+                padding: 105px 0;
+            }
+
+            .final-section {
+                padding: 120px 0;
+            }
+
+            .section-number {
+                top: 50px;
                 font-size: 5rem;
-                top: 45px;
             }
 
-            .intro-title {
+            .section-title {
                 font-size: 3.2rem;
             }
 
-            .intro-text {
-                font-size: 0.85rem;
-                line-height: 1.8;
+            .profile-card {
+                padding: 25px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .stat {
+                padding: 18px;
+            }
+
+            .stat strong {
+                font-size: 2rem;
+            }
+
+            .timeline-item h3 {
+                font-size: 1.8rem;
+            }
+
+            .paddock-card {
+                min-height: 190px;
+            }
+
+            .game-content {
+                padding: 28px;
+            }
+
+            .contract {
+                padding: 30px 24px;
+            }
+
+            .contract h3 {
+                font-size: 2.3rem;
+            }
+
+            .playlist-top {
+                padding: 28px;
+            }
+
+            .playlist-top h3 {
+                font-size: 2.4rem;
+            }
+
+            .song {
+                padding: 17px 20px;
             }
 
             footer {
-                padding: 25px 8%;
+                padding: 25px 7%;
             }
         }
     </style>
@@ -549,9 +1254,37 @@
 
 <body>
 
-    <!-- =========================
-         HERO / HOME
-    ========================= -->
+    <!-- =====================================
+         NAVIGATION
+    ===================================== -->
+
+    <nav class="navbar">
+
+        <a href="#home" class="nav-logo">
+            THE <span>22ND</span> GRAND PRIX
+        </a>
+
+        <button class="menu-button" id="menuButton" aria-label="Abrir menú">
+            ☰
+        </button>
+
+        <div class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#driver">Driver</a>
+            <a href="#story">Story</a>
+            <a href="#paddock">Paddock</a>
+            <a href="#games">Race Control</a>
+            <a href="#pr">PR</a>
+            <a href="#playlist">22 Laps</a>
+            <a href="#final">Final Lap</a>
+        </div>
+
+    </nav>
+
+
+    <!-- =====================================
+         HOME
+    ===================================== -->
 
     <main class="hero" id="home">
 
@@ -597,7 +1330,7 @@
 
             </div>
 
-            <a href="#paddock" class="enter-button">
+            <a href="#driver" class="enter-button">
                 Enter Paddock
                 <span class="arrow">→</span>
             </a>
@@ -612,34 +1345,123 @@
     </main>
 
 
-    <!-- =========================
-         TEMPORARY INTRO SECTION
-         WE WILL REPLACE THIS LATER
-    ========================= -->
+    <!-- =====================================
+         DRIVER #22
+    ===================================== -->
 
-    <section class="intro-section" id="paddock">
+    <section class="driver-section" id="driver">
 
-        <div class="intro-inner">
+        <div class="section-number">01</div>
+
+        <div class="section-wrap reveal">
 
             <div class="section-label">
-                01 · Paddock Access
+                01 · Driver Profile
             </div>
 
-            <h2 class="intro-title">
-                Welcome,<br>
-                Driver #22.
+            <h2 class="section-title">
+                Meet <span class="purple">Driver #22.</span>
             </h2>
 
-            <p class="intro-text">
-                Your birthday weekend has officially begun.
-                The paddock is ready, the lights are on,
-                and there are 22 laps waiting for you.
-                <br><br>
-                This is only the beginning.
+            <p class="section-description">
+                Before entering the paddock, every driver deserves
+                an official profile. And this one happens to belong
+                to one of the most important people in my life.
             </p>
 
-            <div class="coming-soon">
-                More sections are currently under construction.
+            <div class="profile-grid">
+
+                <div class="profile-card">
+
+                    <div class="card-label">
+                        Official name
+                    </div>
+
+                    <h3>
+                        Sheila <span>💜</span>
+                    </h3>
+
+                    <div class="favorites">
+
+                        <span class="tag">Mallorca</span>
+                        <span class="tag">22 years</span>
+                        <span class="tag">Purple</span>
+                        <span class="tag">Haikyuu!!</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-card">
+
+                    <div class="card-label">
+                        Known aliases
+                    </div>
+
+                    <h3>
+                        Shei · Sheishei
+                    </h3>
+
+                    <div class="favorites">
+
+                        <span class="tag">Sheilis</span>
+                        <span class="tag">Shein</span>
+                        <span class="tag">Minion</span>
+                        <span class="tag">Ni Niña</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat">
+                    <strong>22</strong>
+                    <span>Birthday Edition</span>
+                </div>
+
+                <div class="stat">
+                    <strong>2+</strong>
+                    <span>Years of friendship</span>
+                </div>
+
+                <div class="stat">
+                    <strong>0</strong>
+                    <span>Friendship DNFs</span>
+                </div>
+
+                <div class="stat">
+                    <strong>∞</strong>
+                    <span>Memories</span>
+                </div>
+
+            </div>
+
+
+            <div class="profile-card" style="margin-top:25px;">
+
+                <div class="card-label">
+                    Favorite things detected
+                </div>
+
+                <div class="favorites">
+
+                    <span class="tag">🐈 Cats</span>
+                    <span class="tag">🦦 Ferrets</span>
+                    <span class="tag">🦊 Foxes</span>
+                    <span class="tag">🏎️ Charles Leclerc</span>
+                    <span class="tag">🏎️ Carlos Sainz</span>
+                    <span class="tag">🏐 Volleyball</span>
+                    <span class="tag">🏐 Haikyuu!!</span>
+                    <span class="tag">🎵 Morat</span>
+                    <span class="tag">💜 Purple</span>
+
+                </div>
+
             </div>
 
         </div>
@@ -647,19 +1469,695 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================
+         THE STORY
+    ===================================== -->
+
+    <section class="story-section" id="story">
+
+        <div class="section-number">02</div>
+
+        <div class="section-wrap reveal">
+
+            <div class="section-label">
+                02 · Race History
+            </div>
+
+            <h2 class="section-title">
+                Where it <span class="red">started.</span>
+            </h2>
+
+            <p class="section-description">
+                Some friendships begin in ordinary places.
+                Ours began somewhere slightly more chaotic:
+                a WhatsApp roleplay community.
+            </p>
+
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        Chapter 01 · Argentina
+                    </div>
+
+                    <h3>
+                        Matías & Rafael
+                    </h3>
+
+                    <p>
+                        We met through a roleplay community inspired
+                        by the cast of <em>La sociedad de la nieve</em>.
+                        She played Matías Recalt. I played Rafael Federman.
+                        At first, we were simply two people behind characters.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        Chapter 02 · Beyond Roleplay
+                    </div>
+
+                    <h3>
+                        Then we clicked.
+                    </h3>
+
+                    <p>
+                        Somewhere along the way, we started talking
+                        more outside of roleplay. And somehow,
+                        those conversations became something much
+                        more important than the characters we were playing.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        Chapter 03 · The Midnight Era
+                    </div>
+
+                    <h3>
+                        10-hour calls.
+                    </h3>
+
+                    <p>
+                        Late-night games. Calls that lasted until morning.
+                        Falling asleep while still connected and waking up
+                        to phones that had apparently survived more than
+                        ten hours of conversation.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        Chapter 04 · Mallorca
+                    </div>
+
+                    <h3>
+                        The first trip.
+                    </h3>
+
+                    <p>
+                        December 2025. Mallorca.
+                        The first time we met outside a screen.
+                        Maybe we didn't get to do everything we wanted,
+                        but that doesn't mean the story ends there.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-date">
+                        Chapter 05 · Still here
+                    </div>
+
+                    <h3>
+                        The friendship continues.
+                    </h3>
+
+                    <p>
+                        Some things change. Some chapters close.
+                        But somehow, after everything, I still choose
+                        you every day as my best friend.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         THE PADDOCK
+    ===================================== -->
+
+    <section class="paddock-section" id="paddock">
+
+        <div class="section-number">03</div>
+
+        <div class="section-wrap reveal">
+
+            <div class="section-label">
+                03 · Paddock Access
+            </div>
+
+            <h2 class="section-title">
+                Welcome to the <span class="purple">paddock.</span>
+            </h2>
+
+            <p class="section-description">
+                Every driver has their essentials.
+                These are Sheila's.
+            </p>
+
+
+            <div class="paddock-grid">
+
+                <article class="paddock-card">
+
+                    <div class="paddock-icon">🏎️</div>
+
+                    <small>Driver #16</small>
+
+                    <h3>Charles Leclerc</h3>
+
+                    <p>
+                        Paddock obsession: confirmed.
+                        Treatment status: unavailable.
+                    </p>
+
+                </article>
+
+
+                <article class="paddock-card">
+
+                    <div class="paddock-icon">🏎️</div>
+
+                    <small>Driver #55</small>
+
+                    <h3>Carlos Sainz</h3>
+
+                    <p>
+                        Because apparently one Ferrari driver
+                        was not enough.
+                    </p>
+
+                </article>
+
+
+                <article class="paddock-card">
+
+                    <div class="paddock-icon">🦦</div>
+
+                    <small>Wildlife Department</small>
+
+                    <h3>Ferrets</h3>
+
+                    <p>
+                        Officially adorable.
+                        Potentially responsible for chaos.
+                    </p>
+
+                </article>
+
+
+                <article class="paddock-card">
+
+                    <div class="paddock-icon">🎵</div>
+
+                    <small>Audio Department</small>
+
+                    <h3>Morat Radio</h3>
+
+                    <p>
+                        Broadcasting exclusively in Spanish.
+                        English songs are currently under investigation.
+                    </p>
+
+                </article>
+
+
+                <article class="paddock-card">
+
+                    <div class="paddock-icon">🐈</div>
+
+                    <small>Companion Division</small>
+
+                    <h3>Cats</h3>
+
+                    <p>
+                        Cute. Independent.
+                        Probably judging everyone.
+                    </p>
+
+                </article>
+
+
+                <article class="paddock-card">
+
+                    <div class="paddock-icon">🏐</div>
+
+                    <small>Sports Department</small>
+
+                    <h3>Haikyuu!!</h3>
+
+                    <p>
+                        Volleyball, friendship, emotional damage.
+                        Everything a driver needs.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         RACE CONTROL
+    ===================================== -->
+
+    <section class="games-section" id="games">
+
+        <div class="section-number">04</div>
+
+        <div class="section-wrap reveal">
+
+            <div class="section-label">
+                04 · Race Control
+            </div>
+
+            <h2 class="section-title">
+                <span class="red">Games.</span><br>
+                Questions.<br>
+                Chaos.
+            </h2>
+
+            <p class="section-description">
+                No birthday Grand Prix is complete without
+                a few challenges for the driver.
+            </p>
+
+
+            <div class="game-panel">
+
+                <div class="game-header">
+
+                    <span>Race Control · Challenge Centre</span>
+
+                    <div class="game-lights">
+                        <div class="light"></div>
+                        <div class="light"></div>
+                        <div class="light"></div>
+                        <div class="light"></div>
+                        <div class="light"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="game-content">
+
+                    <h3>
+                        Challenges incoming.
+                    </h3>
+
+                    <p>
+                        This section will eventually contain
+                        personalized questions, memes, quizzes
+                        and tiny tests designed specifically
+                        for Sheila.
+                    </p>
+
+                    <div class="game-placeholder">
+                        RACE CONTROL MESSAGE:
+                        <br><br>
+                        The driver has not yet been informed
+                        of what awaits her here.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         PR CONTRACT
+    ===================================== -->
+
+    <section class="pr-section" id="pr">
+
+        <div class="section-number">05</div>
+
+        <div class="section-wrap reveal">
+
+            <div class="section-label">
+                05 · Management Department
+            </div>
+
+            <h2 class="section-title">
+                Your <span class="purple">PR.</span>
+            </h2>
+
+            <p class="section-description">
+                After careful consideration, the management team
+                has reached a very important conclusion:
+                Sheila requires professional representation.
+            </p>
+
+
+            <div class="contract">
+
+                <h3>
+                    Driver Representation Agreement
+                </h3>
+
+                <div class="contract-subtitle">
+                    Official birthday edition · 2026
+                </div>
+
+                <div class="contract-rule"></div>
+
+                <ol>
+
+                    <li>
+                        <strong>Clause 01 — Representation.</strong>
+                        The undersigned PR representative agrees
+                        to defend Driver #22 from unnecessary criticism,
+                        especially when said criticism concerns her
+                        questionable obsession with Formula 1 drivers.
+                    </li>
+
+                    <li>
+                        <strong>Clause 02 — Charles Leclerc.</strong>
+                        The PR representative acknowledges that
+                        Charles Leclerc is a recurring topic of conversation
+                        and agrees to act accordingly.
+                    </li>
+
+                    <li>
+                        <strong>Clause 03 — Morat.</strong>
+                        The PR representative accepts that Morat
+                        may appear in conversations without prior warning.
+                    </li>
+
+                    <li>
+                        <strong>Clause 04 — Emergency calls.</strong>
+                        In the event of emotional distress, birthday chaos,
+                        F1 drama or an excessive amount of memes,
+                        the PR representative must remain available.
+                    </li>
+
+                    <li>
+                        <strong>Clause 05 — Friendship.</strong>
+                        This contract remains valid indefinitely,
+                        regardless of season, team changes,
+                        race results or geographical distance.
+                    </li>
+
+                </ol>
+
+                <div class="contract-rule"></div>
+
+                <p style="color:var(--gray); font-size:0.68rem; line-height:1.8;">
+                    Status: <strong style="color:var(--purple);">
+                    PERMANENTLY ACTIVE
+                    </strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         22 LAPS / PLAYLIST
+    ===================================== -->
+
+    <section class="playlist-section" id="playlist">
+
+        <div class="section-number">06</div>
+
+        <div class="section-wrap reveal">
+
+            <div class="section-label">
+                06 · Audio Department
+            </div>
+
+            <h2 class="section-title">
+                <span class="purple">22</span> laps.
+            </h2>
+
+            <p class="section-description">
+                Twenty-two songs for twenty-two years.
+                The official soundtrack is waiting.
+            </p>
+
+
+            <div class="playlist-card">
+
+                <div class="playlist-top">
+
+                    <small>
+                        Birthday soundtrack · Driver #22
+                    </small>
+
+                    <h3>
+                        Morat Radio
+                    </h3>
+
+                </div>
+
+
+                <div class="playlist-list">
+
+                    <div class="song">
+                        <div class="song-number">01</div>
+                        <div class="song-info">
+                            <strong>Track pending</strong>
+                            <span>Selected for Sheila</span>
+                        </div>
+                    </div>
+
+                    <div class="song">
+                        <div class="song-number">02</div>
+                        <div class="song-info">
+                            <strong>Track pending</strong>
+                            <span>Selected for Sheila</span>
+                        </div>
+                    </div>
+
+                    <div class="song">
+                        <div class="song-number">03</div>
+                        <div class="song-info">
+                            <strong>Track pending</strong>
+                            <span>Selected for Sheila</span>
+                        </div>
+                    </div>
+
+                    <div class="song">
+                        <div class="song-number">04</div>
+                        <div class="song-info">
+                            <strong>Track pending</strong>
+                            <span>Selected for Sheila</span>
+                        </div>
+                    </div>
+
+                    <div class="song">
+                        <div class="song-number">05</div>
+                        <div class="song-info">
+                            <strong>Track pending</strong>
+                            <span>Selected for Sheila</span>
+                        </div>
+                    </div>
+
+                    <div class="song">
+                        <div class="song-number">06</div>
+                        <div class="song-info">
+                            <strong>Track pending</strong>
+                            <span>Selected for Sheila</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
+         FINAL LAP
+    ===================================== -->
+
+    <section class="final-section" id="final">
+
+        <div class="final-content reveal">
+
+            <div class="final-number">
+                22
+            </div>
+
+            <div class="section-label">
+                Final Lap · 13.08.2026
+            </div>
+
+            <h2>
+                Happy<br>
+                <span>Birthday, Sheila.</span>
+            </h2>
+
+            <p class="final-message">
+                This is only the beginning.
+                The memories, the late-night calls,
+                the drawings, Mallorca, the chaos,
+                the laughs and everything still waiting
+                to happen deserve their own chapters.
+            </p>
+
+            <div class="podium">
+
+                <div class="podium-line"></div>
+
+                <div class="podium-text">
+                    Driver #22 · P1 in my heart
+                </div>
+
+                <div class="podium-line"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================
          FOOTER
-    ========================= -->
+    ===================================== -->
 
     <footer>
+
         <span>
             The 22nd Grand Prix · 2026
         </span>
 
-        <span class="footer-purple">
-            Made for Sheila
+        <span class="purple">
+            Made with love for Sheila
         </span>
+
     </footer>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+        /* =========================
+           MOBILE MENU
+        ========================= */
+
+        const menuButton = document.getElementById("menuButton");
+        const navLinks = document.getElementById("navLinks");
+
+        menuButton.addEventListener("click", () => {
+            navLinks.classList.toggle("open");
+
+            if (navLinks.classList.contains("open")) {
+                menuButton.textContent = "✕";
+            } else {
+                menuButton.textContent = "☰";
+            }
+        });
+
+
+        /* Close mobile menu after clicking */
+
+        document.querySelectorAll(".nav-links a").forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                navLinks.classList.remove("open");
+                menuButton.textContent = "☰";
+
+            });
+
+        });
+
+
+        /* =========================
+           SCROLL REVEAL
+        ========================= */
+
+        const revealElements =
+            document.querySelectorAll(".reveal");
+
+        const observer =
+            new IntersectionObserver(
+                (entries) => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add("visible");
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12
+                }
+            );
+
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+
+
+        /* =========================
+           NAVBAR BACKGROUND
+        ========================= */
+
+        const navbar =
+            document.querySelector(".navbar");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 40) {
+
+                navbar.style.background =
+                    "rgba(8,8,10,0.94)";
+
+            } else {
+
+                navbar.style.background =
+                    "rgba(8,8,10,0.82)";
+
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>
