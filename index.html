@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The 22nd Grand Prix — Sheila</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap');
+
+        :root {
+            --black: #08080a;
+            --dark: #101014;
+            --red: #8b0d16;
+            --red-bright: #c41224;
+            --purple: #7b4ba3;
+            --purple-dark: #45205f;
+            --white: #f4f1ed;
+            --gray: #a6a3a8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           BACKGROUND
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            min-height: 100svh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(
+                    circle at 78% 48%,
+                    rgba(139, 13, 22, 0.35),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    circle at 20% 80%,
+                    rgba(123, 75, 163, 0.16),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    125deg,
+                    #050506 0%,
+                    #0c0b0f 48%,
+                    #19090d 100%
+                );
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    115deg,
+                    transparent 0%,
+                    transparent 45%,
+                    rgba(255,255,255,0.025) 45.2%,
+                    transparent 45.5%
+                );
+            pointer-events: none;
+        }
+
+        /* Decorative racing lines */
+
+        .track-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(196, 18, 36, 0.65),
+                transparent
+            );
+            transform: rotate(-18deg);
+            opacity: 0.7;
+        }
+
+        .line-one {
+            width: 90vw;
+            top: 21%;
+            right: -18%;
+        }
+
+        .line-two {
+            width: 70vw;
+            top: 28%;
+            right: -15%;
+            opacity: 0.3;
+        }
+
+        .line-three {
+            width: 55vw;
+            bottom: 17%;
+            left: -15%;
+            transform: rotate(12deg);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(123, 75, 163, 0.7),
+                transparent
+            );
+        }
+
+        /* Giant 22 */
+
+        .giant-number {
+            position: absolute;
+            right: 4vw;
+            bottom: -9vh;
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(18rem, 42vw, 43rem);
+            font-weight: 700;
+            line-height: 0.8;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            width: min(1200px, 90%);
+            padding: 60px 0;
+            animation: appear 1.2s ease forwards;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 38px;
+            height: 2px;
+            background: var(--purple);
+        }
+
+        .title {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(4.5rem, 11vw, 10rem);
+            line-height: 0.83;
+            letter-spacing: -0.025em;
+            text-transform: uppercase;
+            max-width: 900px;
+        }
+
+        .title span {
+            display: block;
+        }
+
+        .title .red {
+            color: var(--red-bright);
+        }
+
+        .title .purple {
+            color: var(--purple);
+        }
+
+        .subtitle {
+            margin-top: 32px;
+            font-size: clamp(0.8rem, 1.5vw, 1rem);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        /* =========================
+           DRIVER INFO
+        ========================= */
+
+        .driver-info {
+            margin-top: 55px;
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            flex-wrap: wrap;
+        }
+
+        .driver-number {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1;
+            color: var(--purple);
+        }
+
+        .number-label {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .number-label small {
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        .number-label strong {
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 1px;
+            height: 45px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .birthday {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .birthday small {
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+
+        .birthday strong {
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+        }
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .enter-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 55px;
+            padding: 17px 28px;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: var(--white);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            transition: 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enter-button::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--red-bright);
+            transform: translateX(-101%);
+            transition: transform 0.35s ease;
+            z-index: -1;
+        }
+
+        .enter-button:hover::before {
+            transform: translateX(0);
+        }
+
+        .enter-button:hover {
+            border-color: var(--red-bright);
+            transform: translateY(-3px);
+        }
+
+        .arrow {
+            font-size: 1.1rem;
+            transition: transform 0.35s ease;
+        }
+
+        .enter-button:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        /* =========================
+           SCROLL INDICATOR
+        ========================= */
+
+        .scroll-indicator {
+            position: absolute;
+            z-index: 5;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 9px;
+            color: rgba(255,255,255,0.45);
+            font-size: 0.55rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 35px;
+            background: linear-gradient(
+                var(--purple),
+                transparent
+            );
+            animation: scrollPulse 1.8s infinite;
+        }
+
+        /* =========================
+           SECOND SECTION
+        ========================= */
+
+        .intro-section {
+            min-height: 70vh;
+            padding: 120px 8%;
+            background: var(--dark);
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .intro-section::before {
+            content: "01";
+            position: absolute;
+            top: 70px;
+            right: 8%;
+            font-family: 'Oswald', sans-serif;
+            font-size: 7rem;
+            color: rgba(255,255,255,0.025);
+        }
+
+        .intro-inner {
+            max-width: 900px;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--purple);
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .intro-title {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-size: clamp(2.8rem, 6vw, 5.5rem);
+            line-height: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .intro-text {
+            max-width: 650px;
+            color: var(--gray);
+            line-height: 1.9;
+            font-size: 0.95rem;
+        }
+
+        .coming-soon {
+            margin-top: 45px;
+            display: inline-block;
+            border-left: 2px solid var(--red-bright);
+            padding-left: 18px;
+            color: var(--white);
+            font-size: 0.7rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 30px 8%;
+            background: #060607;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        footer span {
+            color: rgba(255,255,255,0.35);
+            font-size: 0.58rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .footer-purple {
+            color: var(--purple);
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================= */
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scaleY(0.7);
+                transform-origin: top;
+            }
+
+            50% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .hero-content {
+                width: 86%;
+                padding-bottom: 90px;
+            }
+
+            .eyebrow {
+                font-size: 0.58rem;
+                letter-spacing: 0.2em;
+            }
+
+            .title {
+                font-size: clamp(4rem, 18vw, 7rem);
+            }
+
+            .subtitle {
+                font-size: 0.65rem;
+                letter-spacing: 0.13em;
+                line-height: 1.7;
+                max-width: 300px;
+            }
+
+            .driver-info {
+                margin-top: 40px;
+                gap: 22px;
+            }
+
+            .divider {
+                display: none;
+            }
+
+            .number {
+                font-size: 3rem;
+            }
+
+            .enter-button {
+                margin-top: 40px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .giant-number {
+                right: -5vw;
+                bottom: 3vh;
+                font-size: 65vw;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+
+            .intro-section {
+                min-height: 75vh;
+                padding: 90px 8%;
+            }
+
+            .intro-section::before {
+                font-size: 5rem;
+                top: 45px;
+            }
+
+            .intro-title {
+                font-size: 3.2rem;
+            }
+
+            .intro-text {
+                font-size: 0.85rem;
+                line-height: 1.8;
+            }
+
+            footer {
+                padding: 25px 8%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HERO / HOME
+    ========================= -->
+
+    <main class="hero" id="home">
+
+        <div class="track-line line-one"></div>
+        <div class="track-line line-two"></div>
+        <div class="track-line line-three"></div>
+
+        <div class="giant-number">22</div>
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                Birthday Division · Mallorca GP
+            </div>
+
+            <h1 class="title">
+                <span>The</span>
+                <span class="red">22nd</span>
+                <span class="purple">Grand Prix</span>
+            </h1>
+
+            <p class="subtitle">
+                A private birthday experience created exclusively for Sheila
+            </p>
+
+            <div class="driver-info">
+
+                <div class="driver-number">
+                    <span class="number">#22</span>
+
+                    <div class="number-label">
+                        <small>Driver</small>
+                        <strong>Sheila</strong>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="birthday">
+                    <small>Race Date</small>
+                    <strong>13 · 08 · 2026</strong>
+                </div>
+
+            </div>
+
+            <a href="#paddock" class="enter-button">
+                Enter Paddock
+                <span class="arrow">→</span>
+            </a>
+
+        </div>
+
+        <div class="scroll-indicator">
+            Scroll to enter
+            <div class="scroll-line"></div>
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         TEMPORARY INTRO SECTION
+         WE WILL REPLACE THIS LATER
+    ========================= -->
+
+    <section class="intro-section" id="paddock">
+
+        <div class="intro-inner">
+
+            <div class="section-label">
+                01 · Paddock Access
+            </div>
+
+            <h2 class="intro-title">
+                Welcome,<br>
+                Driver #22.
+            </h2>
+
+            <p class="intro-text">
+                Your birthday weekend has officially begun.
+                The paddock is ready, the lights are on,
+                and there are 22 laps waiting for you.
+                <br><br>
+                This is only the beginning.
+            </p>
+
+            <div class="coming-soon">
+                More sections are currently under construction.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+        <span>
+            The 22nd Grand Prix · 2026
+        </span>
+
+        <span class="footer-purple">
+            Made for Sheila
+        </span>
+    </footer>
+
+</body>
+</html>
